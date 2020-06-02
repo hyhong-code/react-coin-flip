@@ -32,7 +32,7 @@ class Panel extends Component {
   render() {
     return (
       <div className="Panel">
-        <h1>Let's flip a coin</h1>
+        <h1>Let's flip a coin!</h1>
         {this.state.curFace && <Coin face={this.state.curFace} />}
         <button onClick={this.handleClick}>Flip Me</button>
         <p>
