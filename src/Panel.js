@@ -3,31 +3,30 @@ import Coin from "./Coin";
 import "./Panel.css";
 
 class Panel extends Component {
+  static defaultProps = {
+    faces: ["heads", "tail"],
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       numFlips: 0,
       numHeads: 0,
-      curFace: "",
+      curFace: null,
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
+    // flip coin
     const rand = Math.floor(Math.random() * 2);
-    if (rand === 0) {
-      this.setState((prevState) => ({
-        numFlips: prevState.numFlips + 1,
-        numHeads: prevState.numHeads + 1,
-        curFace: "heads",
-      }));
-    } else {
-      this.setState((prevState) => ({
-        ...prevState,
-        numFlips: prevState.numFlips + 1,
-        curFace: "tail",
-      }));
-    }
+    this.setState((ps) => {
+      return {
+        numFlips: ps.numFlips + 1,
+        numHeads: ps.numHeads + (rand === 0 ? 1 : 0),
+        curFace: this.props.faces[rand],
+      };
+    });
   }
 
   render() {
